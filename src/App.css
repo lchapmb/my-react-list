@@ -1,10 +1,5 @@
 .App {
-  text-align: left;
-  left: 100%;
-  right: auto;
-  border-style: solid;
-  width: max-content;
-  padding: 2%;
+  width: 50%;
 }
 
 .todoList {
