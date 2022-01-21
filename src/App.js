@@ -1,13 +1,17 @@
 import React from "react";
-import TodoList from "./components/todoList";
-import Bork from "./components/bork";
+
+import "./App.css";
+
+// components
+// import TodoList from "./components/TodoList";
+import TodoForm from "./components/TodoForm";
 
 function App() {
   return (
     <div className="App">
       <h1>Todo List</h1>
-      <TodoList />
-      <Bork />
+      {/* <TodoList /> */}
+      <TodoForm />
     </div>
   );
 }
