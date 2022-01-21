@@ -3,10 +3,10 @@ import React, { useState } from "react";
 export default function TodoForm() {
   const [todoString, setTodoString] = useState("");
   const [listArray, setListArray] = useState([]);
+  const [searchString, setSearchString] = useState("");
 
   const handleOnChange = (event) => {
-    // event => is the element that the function was called on, it contains the html element
-    // so we are going into the target html event and getting the value which is the value of the input
+    // sets state to the content of input field
     setTodoString(event.target.value);
   };
 
@@ -24,18 +24,20 @@ export default function TodoForm() {
   };
 
   const handleTodoDelete = (todoItem) => {
-    // handle the deletion of a todo item
-    // delete todo
-    console.log(todoItem);
+    // callback to compare key of listItem and key of todoItem clicked for delete
+    const checkForItem = (listItem) => {
+      return listItem.key !== todoItem.key;
+    };
+
+    // creates new array by filtering the clicked item from the array in state
+    const newItemList = listArray.filter(checkForItem);
+
+    // sets state with the new array
+    setListArray(newItemList);
   };
 
   return (
     <div>
-      {/* <ul className="todoList">
-        {listArray.map((todo, index) => (
-          <li key={todo + "_" + index}>{todo}</li>
-        ))}
-      </ul> */}
       <div
         style={{
           width: "100%",
@@ -72,7 +74,6 @@ export default function TodoForm() {
 
       <input
         onChange={handleOnChange}
-        // value={this.state.todoString}
         value={todoString}
         type="text"
         placeholder="Add todo"
@@ -80,6 +81,9 @@ export default function TodoForm() {
       <button onClick={onSubmit} value="submit">
         SUBMIT
       </button>
+      <br />
+      <input></input>
+      <button>SEARCH</button>
     </div>
   );
 }
