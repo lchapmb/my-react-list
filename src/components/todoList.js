@@ -8,7 +8,7 @@ const todos = [
 const Todo = (props) => <li>{props.todo}</li>;
 
 const TodoList = () => (
-  <ul>
+  <ul className="todoList">
     {todos.map((todo) => (
       <Todo todo={todo} key={todo} />
     ))}
