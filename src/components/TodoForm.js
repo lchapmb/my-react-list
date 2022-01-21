@@ -4,14 +4,9 @@ export default function TodoForm() {
   const [todoString, setTodoString] = useState("");
   const [listArray, setListArray] = useState([]);
   const [searchString, setSearchString] = useState("");
-
-  const handleOnChange = (event) => {
-    // sets state to the content of input field
-    setTodoString(event.target.value);
-  };
+  const [searchResultsArray, setSearchResultsArray] = useState([]);
 
   const onSubmit = () => {
-    console.log(`A todo was added: ${todoString}`);
     setListArray(
       listArray.concat([
         {
@@ -34,56 +29,103 @@ export default function TodoForm() {
 
     // sets state with the new array
     setListArray(newItemList);
+
+    // setListArray(listArray.filter(item => item.key != todoItem.key))
+  };
+
+  const onSearchSubmit = () => {
+    const resultsArr = listArray.filter((item) =>
+      item.text.includes(searchString)
+    );
+
+    setSearchResultsArray(resultsArr);
+
+    setSearchString("");
   };
 
   return (
     <div>
-      <div
-        style={{
-          width: "100%",
-          padding: 10,
-          margin: 10,
-        }}
-      >
-        {listArray.map((todo, index) => (
-          <div
-            style={{
-              borderRadius: 5,
-              backgroundColor: "lightblue",
-              padding: 5,
-              margin: 5,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-            key={todo.key}
-          >
-            <div>{todo.key + " : " + todo.text}</div>
-            <div>
-              <button
-                onClick={() => {
-                  handleTodoDelete(todo);
-                }}
-              >
-                Delete
-              </button>
+      <div className="todoList">
+        <div
+          style={{
+            width: "100%",
+            padding: 10,
+            margin: 10,
+          }}
+        >
+          {listArray.map((todo, index) => (
+            <div
+              style={{
+                borderRadius: 5,
+                backgroundColor: "lightblue",
+                padding: 5,
+                margin: 5,
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+              key={todo.key}
+            >
+              <div>{todo.key + " : " + todo.text}</div>
+              <div>
+                <button
+                  onClick={() => {
+                    handleTodoDelete(todo);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <br />
+
+        <input
+          onChange={(e) => {
+            setTodoString(e.target.value);
+          }}
+          value={todoString}
+          name={todoString}
+          type="text"
+          placeholder="Add todo"
+        />
+        <button onClick={onSubmit} value="submit">
+          Submit
+        </button>
       </div>
       <br />
-
-      <input
-        onChange={handleOnChange}
-        value={todoString}
-        type="text"
-        placeholder="Add todo"
-      />
-      <button onClick={onSubmit} value="submit">
-        SUBMIT
-      </button>
-      <br />
-      <input></input>
-      <button>SEARCH</button>
+      <div className="search">
+        <input
+          onChange={(e) => {
+            setSearchString(e.target.value);
+          }}
+          value={searchString}
+          name={searchString}
+          type="text"
+          placeholder="Search Term"
+        ></input>
+        <button onClick={onSearchSubmit} value="searchSubmit">
+          Search
+        </button>
+        <br />
+        <div>
+          {searchResultsArray.map((searchResult) => (
+            <div
+              style={{
+                borderRadius: 5,
+                backgroundColor: "lightblue",
+                padding: 5,
+                margin: 5,
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+              key={searchResult.key}
+            >
+              <div>{searchResult.key + " : " + searchResult.text}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
