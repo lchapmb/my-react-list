@@ -1,3 +1,10 @@
+# my-react-list
+
+## [Public Online Hompage](https://my-react-list.netlify.app/)
+## [React Repo](https://github.com/lchapmb/my-react-list/tree/main)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/19265ca1-d321-4d91-b6a3-e4b4ecfd18a2/deploy-status)](https://app.netlify.com/sites/my-react-list/deploys)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
