@@ -65,35 +65,4 @@ export default function TodoItem({ handleTodoDelete, todo }) {
       </Segment>
     </TodoItemContext.Provider>
   );
-
-  return (
-    <TodoItemContext.Provider
-      value={{
-        tasks,
-        setTasks,
-        subTodoString,
-        setSubTodoString,
-        onSubmit,
-        handleTaskCompleteToggle,
-      }}
-    >
-      <div className="listItem">
-        <div className="todoItem">
-          <div>{todo.key + " : " + todo.text}</div>
-          <div>
-            <Button
-              size="mini"
-              negative
-              onClick={() => {
-                handleTodoDelete(todo);
-              }}
-            >
-              DELETE
-            </Button>
-          </div>
-        </div>
-        <SubtodoList />
-      </div>
-    </TodoItemContext.Provider>
-  );
 }

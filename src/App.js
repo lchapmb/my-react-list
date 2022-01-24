@@ -1,10 +1,8 @@
 import React from "react";
-import { Container, Divider } from "semantic-ui-react";
+import { Container, Divider, Header } from "semantic-ui-react";
 
 import "./App.css";
 
-// components
-// import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
 
 function App() {
@@ -12,8 +10,9 @@ function App() {
     <Container>
       <Divider section hidden />
       <div className="App">
-        <h1>Todo List</h1>
-        {/* <TodoList /> */}
+        <Header as="h1" attached="top" block="true" textAlign="center">
+          Todo List
+        </Header>
         <TodoForm />
       </div>
     </Container>
