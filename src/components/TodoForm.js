@@ -66,8 +66,6 @@ export default function TodoForm() {
             })}
           </List.Content>
         </List>
-        <br />
-
         <Input
           onChange={(e) => {
             setTodoString(e.target.value);

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import { List, Button } from "semantic-ui-react";
+import { List, Button, Input } from "semantic-ui-react";
 
 import "../App.css";
 
@@ -26,29 +26,31 @@ export default function SubtodoList() {
         <List.Item key={todo.key}>
           <List.Content floated="right">
             <Button
+              positive
+              size="mini"
               onClick={() => {
                 handleTaskCompleteToggle(todo.key);
               }}
-              positive
             >
-              MARK AS COMPLETE
+              Mark as Complete
             </Button>
           </List.Content>
           <List.Content>Lena</List.Content>
         </List.Item>
       ))}
-      <input
+      <Input
         type="text"
         value={subTodoString}
         name={subTodoString}
         placeholder="Add subTodo"
+        size="mini"
         onChange={(e) => {
           setSubTodoString(e.target.value);
         }}
       />
-      <button value="submit" onClick={onSubmit}>
+      <Button value="submit" size="mini" onClick={onSubmit}>
         Submit
-      </button>
+      </Button>
     </List>
   );
 

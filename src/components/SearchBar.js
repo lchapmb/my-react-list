@@ -28,7 +28,6 @@ export default function SearchBar() {
         name={searchString}
         type="text"
         placeholder="Search..."
-        // onClick={onSearchSubmit}
       />
       <Button onClick={onSearchSubmit} value="searchSubmit">
         Search
