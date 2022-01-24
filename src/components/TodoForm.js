@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import SubtodoList from "./SubtodoList";
+import React, { createContext, useContext, useState } from "react";
 import "../App.css";
 import TodoItem from "./TodoItem";
+import SearchBar from "./SearchBar";
+
+import { List, Input, Button } from "semantic-ui-react";
+
+export const TodoFormContext = createContext();
 
 export default function TodoForm() {
   const [todoString, setTodoString] = useState("");
@@ -47,28 +51,24 @@ export default function TodoForm() {
   };
 
   return (
-    <div>
+    <TodoFormContext.Provider value={{ listArray }}>
       <div className="todoList">
-        <div
-          style={{
-            width: "100%",
-            padding: 10,
-            margin: 10,
-          }}
-        >
-          {listArray.map((todo) => {
-            return (
-              <TodoItem
-                handleTodoDelete={handleTodoDelete}
-                todo={todo}
-                key={todo.key}
-              />
-            );
-          })}
-        </div>
+        <List>
+          <List.Content>
+            {listArray.map((todo) => {
+              return (
+                <TodoItem
+                  handleTodoDelete={handleTodoDelete}
+                  todo={todo}
+                  key={todo.key}
+                />
+              );
+            })}
+          </List.Content>
+        </List>
         <br />
 
-        <input
+        <Input
           onChange={(e) => {
             setTodoString(e.target.value);
           }}
@@ -77,43 +77,30 @@ export default function TodoForm() {
           type="text"
           placeholder="Add todo"
         />
-        <button onClick={onSubmit} value="submit">
+        <Button onClick={onSubmit} value="submit">
           Submit
-        </button>
+        </Button>
       </div>
       <br />
-      <div className="search">
-        <input
-          onChange={(e) => {
-            setSearchString(e.target.value);
-          }}
-          value={searchString}
-          name={searchString}
-          type="text"
-          placeholder="Search Term"
-        ></input>
-        <button onClick={onSearchSubmit} value="searchSubmit">
-          Search
-        </button>
-        <br />
-        <div>
-          {searchResultsArray.map((searchResult) => (
-            <div
-              style={{
-                borderRadius: 5,
-                backgroundColor: "lightblue",
-                padding: 5,
-                margin: 5,
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-              key={searchResult.key}
-            >
-              <div>{searchResult.key + " : " + searchResult.text}</div>
-            </div>
-          ))}
-        </div>
+      <SearchBar listArray={listArray} />
+      <br />
+      <div>
+        {searchResultsArray.map((searchResult) => (
+          <div
+            style={{
+              borderRadius: 5,
+              backgroundColor: "lightblue",
+              padding: 5,
+              margin: 5,
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+            key={searchResult.key}
+          >
+            <div>{searchResult.key + " : " + searchResult.text}</div>
+          </div>
+        ))}
       </div>
-    </div>
+    </TodoFormContext.Provider>
   );
 }

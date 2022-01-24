@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Input, Button } from "semantic-ui-react";
+
+import { TodoFormContext } from "./TodoForm";
 
 export default function SearchBar() {
+  const { listArray } = useContext(TodoFormContext);
   const [searchString, setSearchString] = useState("");
   const [searchResultsArray, setSearchResultsArray] = useState([]);
 
@@ -16,18 +20,19 @@ export default function SearchBar() {
 
   return (
     <div className="search">
-      <input
+      <Input
         onChange={(e) => {
           setSearchString(e.target.value);
         }}
         value={searchString}
         name={searchString}
         type="text"
-        placeholder="Search Term"
-      ></input>
-      <button onClick={onSearchSubmit} value="searchSubmit">
+        placeholder="Search..."
+        // onClick={onSearchSubmit}
+      />
+      <Button onClick={onSearchSubmit} value="searchSubmit">
         Search
-      </button>
+      </Button>
       <br />
       <div>
         {searchResultsArray.map((searchResult) => (
