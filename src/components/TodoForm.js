@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import SubtodoList from "./SubtodoList";
+import "../App.css";
 
 export default function TodoForm() {
   const [todoString, setTodoString] = useState("");
@@ -53,28 +55,21 @@ export default function TodoForm() {
             margin: 10,
           }}
         >
-          {listArray.map((todo, index) => (
-            <div
-              style={{
-                borderRadius: 5,
-                backgroundColor: "lightblue",
-                padding: 5,
-                margin: 5,
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-              key={todo.key}
-            >
-              <div>{todo.key + " : " + todo.text}</div>
-              <div>
-                <button
-                  onClick={() => {
-                    handleTodoDelete(todo);
-                  }}
-                >
-                  Delete
-                </button>
+          {listArray.map((todo) => (
+            <div className="listItem">
+              <div className="todoItem" key={todo.key}>
+                <div>{todo.key + " : " + todo.text}</div>
+                <div>
+                  <button
+                    onClick={() => {
+                      handleTodoDelete(todo);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
+              <SubtodoList />
             </div>
           ))}
         </div>

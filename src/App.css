@@ -5,3 +5,26 @@
 .todoList {
   list-style-type: none;
 }
+
+/* .listItem {
+  border-radius: 5;
+  background-color: "lightblue";
+  padding: 5;
+  margin: 5;
+  display: "flex";
+  justify-content: "space-between";
+} */
+
+.listItem {
+  border-radius: 5px;
+  background-color: cadetblue;
+  padding: 5px;
+  margin: 5px;
+  display: "flex";
+  justify-content: "space-between";
+}
+
+.subtodoList {
+  border: solid black 2px;
+  margin: 25px;
+}
