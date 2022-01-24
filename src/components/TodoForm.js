@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
+import "../App.css";
+import TodoItem from "./TodoItem";
+import SearchBar from "./SearchBar";
+
+import { Input, Button, Card, Divider } from "semantic-ui-react";
+
+export const TodoFormContext = createContext();
 
 export default function TodoForm() {
   const [todoString, setTodoString] = useState("");
   const [listArray, setListArray] = useState([]);
-  const [searchString, setSearchString] = useState("");
   const [searchResultsArray, setSearchResultsArray] = useState([]);
 
   const onSubmit = () => {
@@ -33,54 +39,27 @@ export default function TodoForm() {
     // setListArray(listArray.filter(item => item.key != todoItem.key))
   };
 
-  const onSearchSubmit = () => {
-    const resultsArr = listArray.filter((item) =>
-      item.text.includes(searchString)
-    );
-
-    setSearchResultsArray(resultsArr);
-
-    setSearchString("");
-  };
-
   return (
-    <div>
+    <TodoFormContext.Provider value={{ listArray }}>
       <div className="todoList">
-        <div
-          style={{
-            width: "100%",
-            padding: 10,
-            margin: 10,
-          }}
+        <Divider hidden />
+        <Card.Group
+          style={{ display: "flex", justifyContent: "space-between" }}
         >
-          {listArray.map((todo, index) => (
-            <div
-              style={{
-                borderRadius: 5,
-                backgroundColor: "lightblue",
-                padding: 5,
-                margin: 5,
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-              key={todo.key}
-            >
-              <div>{todo.key + " : " + todo.text}</div>
-              <div>
-                <button
-                  onClick={() => {
-                    handleTodoDelete(todo);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-        <br />
-
-        <input
+          {listArray.map((todo) => {
+            return (
+              <Card>
+                <TodoItem
+                  handleTodoDelete={handleTodoDelete}
+                  todo={todo}
+                  key={todo.key}
+                />
+              </Card>
+            );
+          })}
+        </Card.Group>
+        <Divider hidden />
+        <Input
           onChange={(e) => {
             setTodoString(e.target.value);
           }}
@@ -89,43 +68,31 @@ export default function TodoForm() {
           type="text"
           placeholder="Add todo"
         />
-        <button onClick={onSubmit} value="submit">
+        <Button onClick={onSubmit} value="submit">
           Submit
-        </button>
+        </Button>
       </div>
       <br />
-      <div className="search">
-        <input
-          onChange={(e) => {
-            setSearchString(e.target.value);
-          }}
-          value={searchString}
-          name={searchString}
-          type="text"
-          placeholder="Search Term"
-        ></input>
-        <button onClick={onSearchSubmit} value="searchSubmit">
-          Search
-        </button>
-        <br />
-        <div>
-          {searchResultsArray.map((searchResult) => (
-            <div
-              style={{
-                borderRadius: 5,
-                backgroundColor: "lightblue",
-                padding: 5,
-                margin: 5,
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-              key={searchResult.key}
-            >
-              <div>{searchResult.key + " : " + searchResult.text}</div>
-            </div>
-          ))}
-        </div>
+      <SearchBar listArray={listArray} />
+      <br />
+      {/* need to separate the search results into a component */}
+      <div>
+        {searchResultsArray.map((searchResult) => (
+          <div
+            style={{
+              borderRadius: 5,
+              backgroundColor: "lightblue",
+              padding: 5,
+              margin: 5,
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+            key={searchResult.key}
+          >
+            <div>{searchResult.key + " : " + searchResult.text}</div>
+          </div>
+        ))}
       </div>
-    </div>
+    </TodoFormContext.Provider>
   );
 }

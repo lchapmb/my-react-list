@@ -1,7 +1,8 @@
-.App {
-  width: 50%;
-}
-
 .todoList {
   list-style-type: none;
+}
+
+.subtodoList {
+  border: solid black 2px;
+  margin: 25px;
 }
