@@ -3,7 +3,7 @@ import "../App.css";
 import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";
 
-import { Input, Button, Card } from "semantic-ui-react";
+import { Input, Button, Card, Divider } from "semantic-ui-react";
 
 export const TodoFormContext = createContext();
 
@@ -42,6 +42,7 @@ export default function TodoForm() {
   return (
     <TodoFormContext.Provider value={{ listArray }}>
       <div className="todoList">
+        <Divider hidden />
         <Card.Group
           style={{ display: "flex", justifyContent: "space-between" }}
         >
@@ -57,6 +58,7 @@ export default function TodoForm() {
             );
           })}
         </Card.Group>
+        <Divider hidden />
         <Input
           onChange={(e) => {
             setTodoString(e.target.value);
