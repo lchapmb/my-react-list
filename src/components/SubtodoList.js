@@ -24,6 +24,7 @@ export default function SubtodoList() {
     <List celled>
       {tasks.map((todo) => (
         <List.Item key={todo.key}>
+          <List.Content floated="left">{todo.text}</List.Content>
           <List.Content floated="right">
             <Button
               positive
@@ -35,7 +36,6 @@ export default function SubtodoList() {
               Mark as Complete
             </Button>
           </List.Content>
-          <List.Content>Lena</List.Content>
         </List.Item>
       ))}
       <Input
