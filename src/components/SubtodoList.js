@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+
+import { List, Button } from "semantic-ui-react";
+
 import "../App.css";
 
 // need an array of items to loop through and display
@@ -6,62 +9,80 @@ import "../App.css";
 // will need tick boxes to mark as complete
 // top level todo to be complete after all sub-tasks complete
 
+import { TodoItemContext } from "./TodoItem";
+
 export default function SubtodoList() {
-  const [subTodoString, setSubTodoString] = useState("");
-  const [subtodoArray, setSubTodoArray] = useState([]);
-
-  // handle new subItem
-  const onSubmit = () => {
-    setSubTodoArray(
-      subtodoArray.concat([
-        {
-          text: subTodoString,
-          key: Math.round((Math.random() + 1) * 100000).toString(),
-        },
-      ])
-    );
-    setSubTodoString("");
-  };
-
-  // handle subtask being checked
-  const handleTaskCheck = (todo) => {
-    console.log(`check ${todo.key}`);
-    console.log(todo.key + "complete");
-    const checkbox = document.querySelector("." + todo.key + "complete");
-    console.log(checkbox.checked);
-  };
+  const {
+    tasks,
+    handleTaskCompleteToggle,
+    subTodoString,
+    setSubTodoString,
+    onSubmit,
+  } = useContext(TodoItemContext);
 
   return (
-    <div className="subtodoList">
-      <ul>
-        {subtodoArray.map((todo) => (
-          <li className="todoItem" key={todo.key}>
-            {todo.key + " : " + todo.text}{" "}
-            <input
-              type="checkbox"
-              value="complete"
-              id={todo.key + "complete"}
+    <List celled>
+      {tasks.map((todo) => (
+        <List.Item key={todo.key}>
+          <List.Content floated="right">
+            <Button
               onClick={() => {
-                handleTaskCheck(todo);
+                handleTaskCompleteToggle(todo.key);
               }}
-            />
-          </li>
-        ))}
-        <li>
-          <input
-            type="text"
-            value={subTodoString}
-            name={subTodoString}
-            placeholder="Add subTodo"
-            onChange={(e) => {
-              setSubTodoString(e.target.value);
-            }}
-          />
-          <button value="submit" onClick={onSubmit}>
-            Submit
-          </button>
-        </li>
-      </ul>
-    </div>
+              positive
+            >
+              MARK AS COMPLETE
+            </Button>
+          </List.Content>
+          <List.Content>Lena</List.Content>
+        </List.Item>
+      ))}
+      <input
+        type="text"
+        value={subTodoString}
+        name={subTodoString}
+        placeholder="Add subTodo"
+        onChange={(e) => {
+          setSubTodoString(e.target.value);
+        }}
+      />
+      <button value="submit" onClick={onSubmit}>
+        Submit
+      </button>
+    </List>
   );
+
+  //   return (
+  //     <div className="subtodoList">
+  //       <ul>
+  //         {tasks.map((todo) => (
+  //           <li className="todoItem" key={todo.key}>
+  //             {todo.key + " : " + todo.text}{" "}
+  //             <input
+  //               type="checkbox"
+  //               value="complete"
+  //               id={todo.key + "complete"}
+  //               onClick={() => {
+  //                 handleTaskCompleteToggle(todo.key);
+  //               }}
+  //             />
+  //           </li>
+  //         ))}
+  //         <li>
+  //           <input
+  //             type="text"
+  //             value={subTodoString}
+  //             name={subTodoString}
+  //             placeholder="Add subTodo"
+  //             onChange={(e) => {
+  //               setSubTodoString(e.target.value);
+  //             }}
+  //           />
+  //           <button value="submit" onClick={onSubmit}>
+  //             Submit
+  //           </button>
+  //         </li>
+  //       </ul>
+  //     </div>
+  //   );
 }

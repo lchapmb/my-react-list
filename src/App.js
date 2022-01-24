@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Divider } from "semantic-ui-react";
 
 import "./App.css";
 
@@ -8,11 +9,14 @@ import TodoForm from "./components/TodoForm";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Todo List</h1>
-      {/* <TodoList /> */}
-      <TodoForm />
-    </div>
+    <Container>
+      <Divider section hidden />
+      <div className="App">
+        <h1>Todo List</h1>
+        {/* <TodoList /> */}
+        <TodoForm />
+      </div>
+    </Container>
   );
 }
 
