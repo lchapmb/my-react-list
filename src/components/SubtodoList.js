@@ -6,35 +6,62 @@ import "../App.css";
 // will need tick boxes to mark as complete
 // top level todo to be complete after all sub-tasks complete
 
-const subtodoArray = [
-  { text: "Task 1", key: 100001 },
-  { text: "Task 2", key: 100002 },
-  { text: "Task 3", key: 100003 },
-];
-
 export default function SubtodoList() {
+  const [subTodoString, setSubTodoString] = useState("");
+  const [subtodoArray, setSubTodoArray] = useState([]);
+
+  // handle new subItem
+  const onSubmit = () => {
+    setSubTodoArray(
+      subtodoArray.concat([
+        {
+          text: subTodoString,
+          key: Math.round((Math.random() + 1) * 100000).toString(),
+        },
+      ])
+    );
+    setSubTodoString("");
+  };
+
   // handle subtask being checked
   const handleTaskCheck = (todo) => {
     console.log(`check ${todo.key}`);
+    console.log(todo.key + "complete");
+    const checkbox = document.querySelector("." + todo.key + "complete");
+    console.log(checkbox.checked);
   };
 
   return (
     <div className="subtodoList">
-      {subtodoArray.map((todo) => (
-        <ul className="todoItem" key={todo.key}>
-          <li>
+      <ul>
+        {subtodoArray.map((todo) => (
+          <li className="todoItem" key={todo.key}>
             {todo.key + " : " + todo.text}{" "}
             <input
               type="checkbox"
-              name="complete"
+              value="complete"
               id={todo.key + "complete"}
               onClick={() => {
                 handleTaskCheck(todo);
               }}
             />
           </li>
-        </ul>
-      ))}
+        ))}
+        <li>
+          <input
+            type="text"
+            value={subTodoString}
+            name={subTodoString}
+            placeholder="Add subTodo"
+            onChange={(e) => {
+              setSubTodoString(e.target.value);
+            }}
+          />
+          <button value="submit" onClick={onSubmit}>
+            Submit
+          </button>
+        </li>
+      </ul>
     </div>
   );
 }
