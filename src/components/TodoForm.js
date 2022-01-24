@@ -1,16 +1,15 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import "../App.css";
 import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";
 
-import { List, Input, Button } from "semantic-ui-react";
+import { Input, Button, Card } from "semantic-ui-react";
 
 export const TodoFormContext = createContext();
 
 export default function TodoForm() {
   const [todoString, setTodoString] = useState("");
   const [listArray, setListArray] = useState([]);
-  const [searchString, setSearchString] = useState("");
   const [searchResultsArray, setSearchResultsArray] = useState([]);
 
   const onSubmit = () => {
@@ -40,32 +39,24 @@ export default function TodoForm() {
     // setListArray(listArray.filter(item => item.key != todoItem.key))
   };
 
-  const onSearchSubmit = () => {
-    const resultsArr = listArray.filter((item) =>
-      item.text.includes(searchString)
-    );
-
-    setSearchResultsArray(resultsArr);
-
-    setSearchString("");
-  };
-
   return (
     <TodoFormContext.Provider value={{ listArray }}>
       <div className="todoList">
-        <List>
-          <List.Content>
-            {listArray.map((todo) => {
-              return (
+        <Card.Group
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          {listArray.map((todo) => {
+            return (
+              <Card>
                 <TodoItem
                   handleTodoDelete={handleTodoDelete}
                   todo={todo}
                   key={todo.key}
                 />
-              );
-            })}
-          </List.Content>
-        </List>
+              </Card>
+            );
+          })}
+        </Card.Group>
         <Input
           onChange={(e) => {
             setTodoString(e.target.value);

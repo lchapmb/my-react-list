@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
-import { Button, Header, Segment } from "semantic-ui-react";
+import React, { createContext, useState } from "react";
+import { Button, Segment, Card } from "semantic-ui-react";
 
 import SubtodoList from "./SubtodoList";
 
@@ -45,8 +45,8 @@ export default function TodoItem({ handleTodoDelete, todo }) {
         handleTaskCompleteToggle,
       }}
     >
-      <Segment basic>
-        <Header as="h3" attached="top">
+      <Card.Content>
+        <Card.Header as="h3" attached="top">
           {todo.text}
           <Button
             floated="right"
@@ -58,11 +58,11 @@ export default function TodoItem({ handleTodoDelete, todo }) {
           >
             DELETE
           </Button>
-        </Header>
+        </Card.Header>
         <Segment attached>
           <SubtodoList />
         </Segment>
-      </Segment>
+      </Card.Content>
     </TodoItemContext.Provider>
   );
 }
