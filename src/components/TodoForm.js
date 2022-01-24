@@ -75,6 +75,7 @@ export default function TodoForm() {
       <br />
       <SearchBar listArray={listArray} />
       <br />
+      {/* need to separate the search results into a component */}
       <div>
         {searchResultsArray.map((searchResult) => (
           <div
