@@ -7,7 +7,7 @@ import TodoForm from "./components/TodoForm";
 
 function App() {
   return (
-    <Container>
+    <Container className="appContainer">
       <Divider section hidden />
       <div className="App">
         <Header as="h1" attached="top" block="true" textAlign="center">
