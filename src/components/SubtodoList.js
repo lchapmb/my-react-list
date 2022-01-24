@@ -53,38 +53,4 @@ export default function SubtodoList() {
       </Button>
     </List>
   );
-
-  //   return (
-  //     <div className="subtodoList">
-  //       <ul>
-  //         {tasks.map((todo) => (
-  //           <li className="todoItem" key={todo.key}>
-  //             {todo.key + " : " + todo.text}{" "}
-  //             <input
-  //               type="checkbox"
-  //               value="complete"
-  //               id={todo.key + "complete"}
-  //               onClick={() => {
-  //                 handleTaskCompleteToggle(todo.key);
-  //               }}
-  //             />
-  //           </li>
-  //         ))}
-  //         <li>
-  //           <input
-  //             type="text"
-  //             value={subTodoString}
-  //             name={subTodoString}
-  //             placeholder="Add subTodo"
-  //             onChange={(e) => {
-  //               setSubTodoString(e.target.value);
-  //             }}
-  //           />
-  //           <button value="submit" onClick={onSubmit}>
-  //             Submit
-  //           </button>
-  //         </li>
-  //       </ul>
-  //     </div>
-  //   );
 }

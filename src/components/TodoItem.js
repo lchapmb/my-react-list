@@ -24,6 +24,9 @@ export default function TodoItem({ handleTodoDelete, todo }) {
 
   const handleTaskCompleteToggle = (taskKey) => {
     // this handles marking the task as complete
+    // need to change the button to reflect it is complete
+    // need to track whether all subtasks are done, and complete the task if so
+    // need to indicate task is done
     setTasks(
       tasks.map((task) => {
         if (task.key === taskKey) {
