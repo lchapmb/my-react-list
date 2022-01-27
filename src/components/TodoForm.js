@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 import "../App.css";
 import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";
+import NewToDo from "./NewTodo";
 
 import { Input, Button, Card, Divider } from "semantic-ui-react";
 
@@ -59,18 +60,11 @@ export default function TodoForm() {
           })}
         </Card.Group>
         <Divider hidden />
-        <Input
-          onChange={(e) => {
-            setTodoString(e.target.value);
-          }}
-          value={todoString}
-          name={todoString}
-          type="text"
-          placeholder="Add todo"
+        <NewToDo
+          setTodoString={setTodoString}
+          todoString={todoString}
+          onSubmit={onSubmit}
         />
-        <Button onClick={onSubmit} value="submit">
-          Submit
-        </Button>
       </div>
       <br />
       <SearchBar listArray={listArray} />
