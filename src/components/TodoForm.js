@@ -2,8 +2,8 @@ import React, { createContext, useState } from "react";
 import "../App.css";
 import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";
-import SearchResults from "./SearchResults";
 import NewToDo from "./NewTodo";
+import ToDoList from "./ToDoList";
 
 import { Card, Divider } from "semantic-ui-react";
 
@@ -42,24 +42,17 @@ export default function TodoForm() {
   };
 
   return (
-    <TodoFormContext.Provider value={{ listArray, searchResultsArray }}>
+    <TodoFormContext.Provider
+      value={{
+        listArray,
+        handleTodoDelete,
+        searchResultsArray,
+        setSearchResultsArray,
+      }}
+    >
       <div className="todoList">
         <Divider hidden />
-        <Card.Group
-          style={{ display: "flex", justifyContent: "space-between" }}
-        >
-          {listArray.map((todo) => {
-            return (
-              <Card>
-                <TodoItem
-                  handleTodoDelete={handleTodoDelete}
-                  todo={todo}
-                  key={todo.key}
-                />
-              </Card>
-            );
-          })}
-        </Card.Group>
+        <ToDoList />
         <Divider hidden />
         <NewToDo
           setTodoString={setTodoString}
@@ -68,11 +61,7 @@ export default function TodoForm() {
         />
       </div>
       <br />
-      <SearchBar
-        listArray={listArray}
-        searchResultsArray={searchResultsArray}
-        setSearchResultsArray={setSearchResultsArray}
-      />
+      <SearchBar />
       <br />
     </TodoFormContext.Provider>
   );

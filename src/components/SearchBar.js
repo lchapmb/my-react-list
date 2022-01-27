@@ -5,8 +5,8 @@ import { TodoFormContext } from "./TodoForm";
 
 import SearchResults from "./SearchResults";
 
-export default function SearchBar({ setSearchResultsArray }) {
-  const { listArray } = useContext(TodoFormContext);
+export default function SearchBar() {
+  const { listArray, setSearchResultsArray } = useContext(TodoFormContext);
   const [searchString, setSearchString] = useState("");
 
   const onSearchSubmit = () => {
