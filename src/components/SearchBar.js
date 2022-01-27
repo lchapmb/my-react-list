@@ -3,13 +3,11 @@ import { Input, Button } from "semantic-ui-react";
 
 import { TodoFormContext } from "./TodoForm";
 
-export default function SearchBar({
-  searchResultsArray,
-  setSearchResultsArray,
-}) {
+import SearchResults from "./SearchResults";
+
+export default function SearchBar({ setSearchResultsArray }) {
   const { listArray } = useContext(TodoFormContext);
   const [searchString, setSearchString] = useState("");
-  // const [searchResultsArray, setSearchResultsArray] = useState([]);
 
   const onSearchSubmit = () => {
     const resultsArr = listArray.filter((item) =>
@@ -36,23 +34,7 @@ export default function SearchBar({
         Search
       </Button>
       <br />
-      <div>
-        {searchResultsArray.map((searchResult) => (
-          <div
-            style={{
-              borderRadius: 5,
-              backgroundColor: "lightblue",
-              padding: 5,
-              margin: 5,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-            key={searchResult.key}
-          >
-            <div>{searchResult.key + " : " + searchResult.text}</div>
-          </div>
-        ))}
-      </div>
+      <SearchResults />
     </div>
   );
 }

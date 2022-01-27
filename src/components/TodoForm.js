@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 import "../App.css";
 import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";
+import SearchResults from "./SearchResults";
 import NewToDo from "./NewTodo";
 
 import { Card, Divider } from "semantic-ui-react";
@@ -41,7 +42,7 @@ export default function TodoForm() {
   };
 
   return (
-    <TodoFormContext.Provider value={{ listArray }}>
+    <TodoFormContext.Provider value={{ listArray, searchResultsArray }}>
       <div className="todoList">
         <Divider hidden />
         <Card.Group
@@ -73,24 +74,6 @@ export default function TodoForm() {
         setSearchResultsArray={setSearchResultsArray}
       />
       <br />
-      {/* need to separate the search results into a component */}
-      <div>
-        {searchResultsArray.map((searchResult) => (
-          <div
-            style={{
-              borderRadius: 5,
-              backgroundColor: "lightblue",
-              padding: 5,
-              margin: 5,
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-            key={searchResult.key}
-          >
-            <div>{searchResult.key + " : " + searchResult.text}</div>
-          </div>
-        ))}
-      </div>
     </TodoFormContext.Provider>
   );
 }
