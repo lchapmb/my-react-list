@@ -3,10 +3,13 @@ import { Input, Button } from "semantic-ui-react";
 
 import { TodoFormContext } from "./TodoForm";
 
-export default function SearchBar() {
+export default function SearchBar({
+  searchResultsArray,
+  setSearchResultsArray,
+}) {
   const { listArray } = useContext(TodoFormContext);
   const [searchString, setSearchString] = useState("");
-  const [searchResultsArray, setSearchResultsArray] = useState([]);
+  // const [searchResultsArray, setSearchResultsArray] = useState([]);
 
   const onSearchSubmit = () => {
     const resultsArr = listArray.filter((item) =>

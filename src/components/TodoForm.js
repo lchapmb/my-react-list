@@ -4,7 +4,7 @@ import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";
 import NewToDo from "./NewTodo";
 
-import { Input, Button, Card, Divider } from "semantic-ui-react";
+import { Card, Divider } from "semantic-ui-react";
 
 export const TodoFormContext = createContext();
 
@@ -67,7 +67,11 @@ export default function TodoForm() {
         />
       </div>
       <br />
-      <SearchBar listArray={listArray} />
+      <SearchBar
+        listArray={listArray}
+        searchResultsArray={searchResultsArray}
+        setSearchResultsArray={setSearchResultsArray}
+      />
       <br />
       {/* need to separate the search results into a component */}
       <div>
