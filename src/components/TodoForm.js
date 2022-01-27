@@ -1,6 +1,5 @@
 import React, { createContext, useState } from "react";
 import "../App.css";
-import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";
 import NewToDo from "./NewTodo";
 import ToDoList from "./ToDoList";
@@ -50,16 +49,14 @@ export default function TodoForm() {
         setSearchResultsArray,
       }}
     >
-      <div className="todoList">
-        <Divider hidden />
-        <ToDoList />
-        <Divider hidden />
-        <NewToDo
-          setTodoString={setTodoString}
-          todoString={todoString}
-          onSubmit={onSubmit}
-        />
-      </div>
+      <Divider hidden />
+      <ToDoList />
+      <Divider hidden />
+      <NewToDo
+        setTodoString={setTodoString}
+        todoString={todoString}
+        onSubmit={onSubmit}
+      />
       <br />
       <SearchBar />
       <br />
