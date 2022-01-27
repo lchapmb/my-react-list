@@ -27,13 +27,13 @@ export default function SubtodoList() {
           <List.Content floated="left">{todo.text}</List.Content>
           <List.Content floated="right">
             <Button
-              positive
+              class="ui icon green button"
               size="mini"
               onClick={() => {
                 handleTaskCompleteToggle(todo.key);
               }}
             >
-              Mark as Complete
+              <i class="check icon" />
             </Button>
           </List.Content>
         </List.Item>
